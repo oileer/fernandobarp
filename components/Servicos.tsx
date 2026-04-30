@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 
 const CARDS = [
   {
@@ -36,7 +35,7 @@ export default function Servicos() {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-vault-border/50">
-        {CARDS.map((card, i) => (
+        {CARDS.map((card) => (
           <div
             key={card.id}
             className="group relative p-8 md:p-12 border-b md:border-b-0 md:border-r border-vault-border/50 bg-vault-black hover:bg-vault-dark transition-colors duration-500 overflow-hidden"

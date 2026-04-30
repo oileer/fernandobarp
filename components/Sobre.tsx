@@ -86,8 +86,8 @@ export default function Sobre() {
                 gestão de risco agressiva, mas calculada.
               </p>
               <p className="text-base text-vault-muted leading-relaxed max-w-2xl font-mono italic text-sm">
-                "No mercado de cripto, a volatilidade é o combustível. A paciência é o filtro. 
-                O resultado é a consequência de um sistema blindado."
+                &quot;No mercado de cripto, a volatilidade é o combustível. A paciência é o filtro. 
+                O resultado é a consequência de um sistema blindado.&quot;
               </p>
             </div>
 
