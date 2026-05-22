@@ -1,0 +1,460 @@
+/* ── CSS VARIABLES (identidade fernandobarp.com) ─────────────────────────── */
+.evento-root {
+  --color-background-blue: #080912;
+  --color-primary-blue: #3157e8;
+  --color-secondary-blue: #0c0d1f;
+  --color-text-white: #ecedf4;
+  --color-bg-buttons: #0d0e17;
+
+  font-family: 'Sora', sans-serif !important;
+  background-color: #080912;
+  color: #ecedf4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Garante Sora em TODOS os elementos filhos */
+.evento-root *,
+.evento-root h1,
+.evento-root h2,
+.evento-root h3,
+.evento-root p,
+.evento-root span,
+.evento-root button,
+.evento-root a,
+.evento-root li,
+.evento-root input {
+  font-family: 'Sora', sans-serif !important;
+}
+
+/* ── NOISE TEXTURE ────────────────────────────────────────────────────────── */
+.evento-root::before {
+  content: "";
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.03'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  position: fixed;
+  inset: 0;
+}
+
+/* ── GRADIENT BACKGROUNDS (triângulos do original) ───────────────────────── */
+.bg-triangle {
+  pointer-events: none;
+  position: fixed;
+  z-index: -10;
+  width: 50vw;
+  height: 50vh;
+  filter: blur(60px);
+  transition: opacity 1s ease-in-out;
+}
+.bg-triangle-left {
+  top: -12.5rem;
+  left: 0;
+}
+.bg-triangle-right {
+  bottom: 12.5rem;
+  right: 0;
+  opacity: 0;
+}
+.bg-triangle-inner {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(in oklab, #24275c, rgba(25,27,61,0));
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.bg-triangle-left .bg-triangle-inner  { rotate: 140deg; translate: -50% 50%; }
+.bg-triangle-right .bg-triangle-inner { rotate: -140deg; translate: 50% 50%; }
+
+/* ── GRID SYSTEM ─────────────────────────────────────────────────────────── */
+.main-grid {
+  display: grid;
+  grid-template-columns: [full-start] 20px [main-start] 1fr [main-end] 20px [full-end];
+  min-width: 320px;
+}
+@media (min-width: 1024px) {
+  .main-grid {
+    grid-template-columns: [full-start] 40px [main-start] 1fr [main-end] 40px [full-end];
+  }
+}
+.main-grid > * { grid-column: main; }
+.full-bleed {
+  grid-column: full;
+  width: 100%;
+  min-width: 320px;
+}
+
+/* ── COMPONENTE: BTN-ICON ─────────────────────────────────────────────────── */
+.btn-icon {
+  border-radius: 1rem;
+  border: 1px solid color-mix(in oklab, #3157e8 70%, transparent);
+  position: relative;
+  overflow: hidden;
+  background-color: #0d0e17;
+  color: #ecedf4;
+  transition: border-color 0.3s, background-color 0.3s;
+  cursor: pointer;
+}
+.btn-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right in oklab, #0c0d1f, #111733);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.btn-icon:hover,
+.btn-icon:active {
+  border-color: #3157e8;
+}
+.btn-icon:hover::before,
+.btn-icon:active::before {
+  opacity: 1;
+}
+.btn-icon > * { position: relative; z-index: 10; }
+
+/* ── COMPONENTE: CTA BUTTON ──────────────────────────────────────────────── */
+.cta-btn {
+  display: inline-block;
+  padding: 18px 48px;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in oklab, #3157e8 50%, transparent);
+  background: linear-gradient(to right, #1b2449, #1e2e6d);
+  color: #ecedf4;
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+.cta-btn:hover {
+  background: linear-gradient(to right, #1c2b6d, #2845b4);
+  border-color: #3157e8;
+}
+
+/* ── COMPONENTE: INPUT-STYLE ─────────────────────────────────────────────── */
+.input-style {
+  border: 1px solid color-mix(in oklab, #3157e8 50%, transparent);
+  overflow: hidden;
+  background-color: color-mix(in oklab, #ecedf4 2%, transparent);
+  backdrop-filter: blur(4px);
+  transition: border-color 0.3s;
+  border-radius: 0.75rem;
+  position: relative;
+}
+.input-style:focus-within {
+  border-color: #3157e8;
+}
+.input-style input {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 20px 16px;
+  font-size: 0.875rem;
+  font-family: 'Sora', sans-serif;
+  color: #ecedf4;
+}
+.input-style input::placeholder {
+  color: color-mix(in oklab, #ecedf4 40%, transparent);
+}
+
+/* ── GRADIENTE HORIZONTAL (linha divisória) ──────────────────────────────── */
+.gradient-line {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--color-background-blue, #080912) 0%,
+    #3157e8 30%,
+    #3157e8 70%,
+    var(--color-background-blue, #080912) 100%
+  );
+}
+.gradient-line-sm {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    color-mix(in oklab, #3157e8 30%, transparent) 50%,
+    transparent 100%
+  );
+}
+
+/* ── CARD COM BORDA AZUL ─────────────────────────────────────────────────── */
+.card-blue {
+  border-radius: 1rem;
+  border: 1px solid color-mix(in oklab, #3157e8 70%, transparent);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+  outline: none;
+}
+.card-blue::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: color-mix(in oklab, #080912 20%, transparent);
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.card-blue:hover {
+  border-color: #3157e8;
+}
+.card-blue:hover::before {
+  opacity: 0;
+}
+
+/* ── SEÇÃO HEADER LABEL ──────────────────────────────────────────────────── */
+.section-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: #3157e8;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ── SCROLLBAR ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar              { width: 12px; height: 12px; }
+::-webkit-scrollbar-track        { background: #0c0d1f; border-radius: 6px; }
+::-webkit-scrollbar-thumb        { background-color: #3157e8; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover  { background-color: #3157e8; }
+* { scrollbar-width: thin; scrollbar-color: #3157e8 #0c0d1f; }
+
+/* ── SELECTION ───────────────────────────────────────────────────────────── */
+::selection { background-color: #0c0d1f; color: #3157e8; }
+
+/* ── FAQ ACCORDION ───────────────────────────────────────────────────────── */
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+.faq-content.open {
+  max-height: 300px;
+  opacity: 1;
+}
+
+/* ── PROGRESS BAR ────────────────────────────────────────────────────────── */
+.progress-track {
+  width: 100%;
+  max-width: 480px;
+  height: 4px;
+  background-color: color-mix(in oklab, #3157e8 15%, transparent);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.progress-fill {
+  height: 100%;
+  background-color: #3157e8;
+  border-radius: 999px;
+}
+
+/* ── BADGE EVENTO ────────────────────────────────────────────────────────── */
+.badge-evento {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: #3157e8;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 6px 16px;
+  border: 1px solid color-mix(in oklab, #3157e8 40%, transparent);
+  border-radius: 999px;
+}
+
+/* ── INTRO / LOADER ──────────────────────────────────────────────────────── */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #080912;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.7s ease;
+}
+.intro-overlay.exiting {
+  opacity: 0;
+  pointer-events: none;
+}
+.intro-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.intro-divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #3157e8, transparent);
+  opacity: 0;
+  animation: introFadeInSimple 0.5s ease forwards 0.15s;
+}
+.intro-label {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(0.6rem, 2vw, 0.75rem);
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: color-mix(in oklab, #ecedf4 45%, transparent);
+  opacity: 0;
+  transform: translateY(14px);
+  animation: introFadeInUp 0.6s ease forwards 0.35s;
+}
+.intro-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2.5rem, 9vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ecedf4;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: introFadeInUp 0.8s ease forwards 1s;
+}
+.intro-divider-bottom {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #3157e8, transparent);
+  opacity: 0;
+  animation: introFadeInSimple 0.5s ease forwards 1.6s;
+}
+@keyframes introFadeInSimple {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes introFadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── FADE-UP SCROLL ANIMATION ────────────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── SEÇÃO SOBRE / CONHEÇA ────────────────────────────────────────────────── */
+.sobre-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0.33rem;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent 0%, #3157e8 12%, #3157e8 88%, transparent 100%);
+  pointer-events: none;
+}
+@media (min-width: 1024px) {
+  .sobre-line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.sobre-rows {
+  display: grid;
+  gap: 48px;
+}
+@media (min-width: 1024px) {
+  .sobre-rows { gap: 0; }
+}
+
+.sobre-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  padding-left: 1.5rem;
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .sobre-row {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 80px;
+    padding-left: 0;
+    margin-bottom: 18rem;
+  }
+  .sobre-row:last-child { margin-bottom: 5rem; }
+}
+
+.sobre-dot-center {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #3157e8;
+  z-index: 1;
+}
+@media (min-width: 1024px) { .sobre-dot-center { display: block; } }
+
+.sobre-mobile-dot {
+  position: absolute;
+  left: -1.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #3157e8;
+}
+@media (min-width: 1024px) { .sobre-mobile-dot { display: none; } }
+
+/* Mobile order: text first, image second */
+.sobre-img-col { order: 2; }
+.sobre-text-col { order: 1; }
+@media (min-width: 1024px) {
+  .sobre-img-col { order: unset; }
+  .sobre-text-col { order: unset; }
+}
+
+/* ── MOBILE RESPONSIVENESS ───────────────────────────────────────────────── */
+@media (max-width: 639px) {
+  .evento-root section {
+    padding-top: 52px !important;
+    padding-bottom: 52px !important;
+  }
+
+  .pricing-card {
+    padding: 28px 20px !important;
+  }
+
+  .cta-btn {
+    padding: 16px 24px;
+    font-size: 0.9rem;
+  }
+
+  .faq-content.open {
+    max-height: 500px;
+  }
+}
+
+/* ── TYPOGRAPHY UTILITIES ────────────────────────────────────────────────── */
+.text-primary-blue   { color: #3157e8; }
+.text-text-white     { color: #ecedf4; }
+.text-muted          { color: color-mix(in oklab, #ecedf4 50%, transparent); }
+.bg-secondary-blue   { background-color: #0c0d1f; }
+.font-light          { font-weight: 300; }
+.font-bold           { font-weight: 700; }
+.font-black          { font-weight: 800; }
