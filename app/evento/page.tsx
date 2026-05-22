@@ -204,10 +204,9 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 // ─── PAGE ───────────────────────────────────────────────────────────────────
 export default function EventoPage() {
-  const [loaded, setLoaded] = useState(false);
   return (
     <div className="evento-root">
-      <IntroLoader onDone={() => setLoaded(true)} />
+      <IntroLoader onDone={() => {}} />
 
       {/* Gradient triangles (background decorativos do original) */}
       <div className="bg-triangle bg-triangle-left">
@@ -691,7 +690,7 @@ export default function EventoPage() {
                         marginBottom: 20,
                       }}
                     >
-                      "A mentoria transformou minha forma de ver o mercado: conquistei liberdade financeira e geográfica, desenvolvi controle emocional e aumentei minha assertividade. Hoje opero com clareza, foco e equilíbrio. Sou grato pelo conhecimento e profissionalismo do Fernando."
+                      &ldquo;A mentoria transformou minha forma de ver o mercado: conquistei liberdade financeira e geográfica, desenvolvi controle emocional e aumentei minha assertividade. Hoje opero com clareza, foco e equilíbrio. Sou grato pelo conhecimento e profissionalismo do Fernando.&rdquo;
                     </p>
                     <p
                       style={{
