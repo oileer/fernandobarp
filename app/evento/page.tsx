@@ -874,7 +874,7 @@ export default function EventoPage() {
         <div className="main-grid">
           <FadeUp>
             <div style={{ textAlign: "center", marginBottom: 48 }}>
-              <span className="section-label">Logística</span>
+              <span className="section-label">O Evento</span>
               <h2 style={{ fontFamily: "'Sora', sans-serif", fontSize: "clamp(1.75rem, 4vw, 2.5rem)", fontWeight: 800, marginTop: 12, color: "#ecedf4" }}>
                 Data, local e horário
               </h2>
