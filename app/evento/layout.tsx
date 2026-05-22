@@ -10,8 +10,11 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: "[NOME_EVENTO] — Fernando Barp",
-  description: "[DESCRIÇÃO_BREVE_DO_EVENTO]",
+  title: "Formação Trader — Fernando Barp",
+  description: "Imersão presencial de 2 dias com Fernando Barp. Tudo que ele aprendeu em 7 anos de mercado financeiro em um único final de semana. São Miguel do Oeste, 25 e 26 de julho de 2026.",
+  icons: {
+    icon: "/about/about-1.png",
+  },
   robots: { index: false, follow: false },
 };
 
